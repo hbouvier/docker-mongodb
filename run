@@ -1,0 +1,12 @@
+#!/bin/sh
+mkdir -p db
+
+# -d    Run as a Daemon in background
+# -v    The mongodb writes its data file une /data/db which we link
+#       outside the container in the ./db directory to persist
+#       the database between run/installation. 
+# -name to give a NAME to the RUNNING container to allow the web
+#       service to -link to it
+# -p    INTERFACE:HOST_PORT:DESTINATION_PORT
+# hbouvier/mongodb  The docker container image to run
+docker run -d -v `pwd`/db:/var/mongodb/data -name mongodb -p :27017:27017 hbouvier/mongodb
